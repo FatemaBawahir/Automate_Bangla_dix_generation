@@ -1,6 +1,8 @@
 import sys
-
 import pandas as pd
+
+DIX = "apertium_ben_in_canonical_forms.dix"
+
 person_info_dict ={
         "first_person_val" : "u",
         "second_person_tucCartha_val" : "m_h0",
@@ -11,14 +13,6 @@ person_info_dict ={
     }
 
 def fetch_tam_data(tam):
-    # break on '-'
-    # if after break >1 element available
-    # strip round brackets
-    # break on space
-    # if len > 1
-    # for each ele, break on '=' and make an entry with colon
-    # e-(emp=i)
-    # e-(emp=o neg-past=ni)
     tam_val = []
     tam_info = tam.split('-', 1)
     for i in range(len(tam_info)):
@@ -41,6 +35,31 @@ def write_output(output):
     with open(file_path, 'w') as file:
         file.write(output)
         file.close()
+
+def update_dix(output):
+    with open(DIX, 'r') as file:
+        xml_content = file.read()
+
+    # Specify the tag you want to find and append text after
+    target_tag = "pardefs"
+
+    # Find the index of the target tag's closing bracket
+    target_start = xml_content.find(f"<{target_tag}>")
+    target_end = xml_content.find(f"</{target_tag}>", target_start)
+
+    if target_start != -1 and target_end != -1:
+        # Insert the new text after the closing bracket of the target tag
+        modified_content = (
+                xml_content[:target_start + len(target_tag) + 3] + "\n"
+                + text_to_append
+                + xml_content[target_start + len(target_tag) + 3:]
+        )
+
+        # Save the modified content back to the file
+        with open(DIX, 'w') as file:
+            file.write(modified_content)
+    else:
+        print(f"Target tag '{target_tag}' not found in the Dix.")
 
 def fetch_first_person_dix_entry(first_person_val, category_val, line):
     dix_entry_lst = []
@@ -147,6 +166,8 @@ if __name__ == '__main__':
     global prefix_len
     prefix = sys.argv[1]
     prefix_len = len(prefix)
+    HEADER = "<pardef n=\"kar/a__v\">"
+    FOOTER = "</pardef>"
 
     col_names = df.columns.tolist()
     # rename column names
@@ -175,8 +196,7 @@ if __name__ == '__main__':
     output = ''
     for category_val, tam_val, first_person_val, second_person_tucCartha_val, second_person_val, second_person_honorific_val, \
             third_person_val, third_person_honorific_val, no_person_val in zipped_lists:
-        if tam_val == 'imper-fut':
-            continue
+
         if (isinstance(tam_val, str) and tam_val.lower() != 'nan'):
             tam_data = fetch_tam_data(tam_val)
             line = ""
@@ -220,5 +240,12 @@ if __name__ == '__main__':
             output = output + dix_entry + '\n'
 
         output = output + '\n'
+        # Define the text you want to append in DIX
+        text_to_append = HEADER + "\n" + output + "\n" + FOOTER
 
     write_output(output)
+    update_dix(text_to_append)
+
+
+
+

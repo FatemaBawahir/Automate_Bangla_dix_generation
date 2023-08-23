@@ -307,3 +307,7 @@
 <e><p><l>uka</l><r>a<s n="cat:v"/><s n="per:a"/><s n="tam:subj"/></r></p></e>
 <e><p><l>una</l><r>a<s n="cat:v"/><s n="per:a_h"/><s n="tam:subj"/></r></p></e>
 
+<e><p><l>isa</l><r>a<s n="cat:v"/><s n="per:m_h0"/><s n="tam:imper_fut"/></r></p></e>
+<e><p><l>o</l><r>a<s n="cat:v"/><s n="per:m_h1"/><s n="tam:imper_fut"/></r></p></e>
+<e><p><l>abena</l><r>a<s n="cat:v"/><s n="per:m_h2"/><s n="tam:imper_fut"/></r></p></e>
+
