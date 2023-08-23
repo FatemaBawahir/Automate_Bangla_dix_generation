@@ -140,11 +140,14 @@ def fetch_no_person_dix_entry(no_person_val, category_val, line):
     return dix_entry_lst
 
 if __name__ == '__main__':
+    # Update the file_path and sheet_name as per requirement
     file_path = 'Verb_paradigm.xlsx'
     df = pd.read_excel(file_path, sheet_name='kara')
+
     global prefix_len
     prefix = sys.argv[1]
     prefix_len = len(prefix)
+
     col_names = df.columns.tolist()
     # rename column names
     category = col_names[1]
