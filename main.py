@@ -199,6 +199,9 @@ if __name__ == '__main__':
         pardef_info = pardef_tag.strip().split("/")
         fixed_tag = pardef_info[0]
         var_tag = pardef_info[1].strip().split("__")[0]
+    else:
+        print("Please update the pardef name in the first cell of the excel sheet")
+        sys.exit()
 
     fixed_tag_len = len(fixed_tag)
     HEADER = f"<pardef n=\"{pardef_tag}\">"
