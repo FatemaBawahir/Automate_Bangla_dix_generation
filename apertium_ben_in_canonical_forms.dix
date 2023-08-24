@@ -381,7 +381,6 @@
 <e><p><l>o</l><r>a<s n="cat:v"/><s n="per:m_h1"/><s n="tam:imper_fut"/></r></p></e>
 <e><p><l>abena</l><r>a<s n="cat:v"/><s n="per:m_h2"/><s n="tam:imper_fut"/></r></p></e>
 
-
 </pardef>
 <pardef n="prawyaya">
 <e><p><l></l><r><s n="cat:prawyaya"/></r></p></e>
@@ -692,7 +691,6 @@
 <e><p><l>ie</l><r><s n="cat:v"/><s n="gen:m"/><s n="num:p"/><s n="per:m_h2"/><s n="tam:imper"/></r></p></e>
 <e><p><l>ie</l><r><s n="cat:v"/><s n="gen:f"/><s n="num:p"/><s n="per:m_h2"/><s n="tam:imper"/></r></p></e>
 </pardef>
-<pardef n="k/ara__v">
 
 
 <!-- verbal noun -->

@@ -1,25 +1,17 @@
 Input File:
-1. Is an excel for eg. - Verb_paradigm.xlsx pasted in the same folder as that of script
-2. The input excel sheet can have sub sheets.
+1. Is an excel for eg. Verb_paradigm_kara.xlsx pasted in the same folder as that of script/ given with correct path as argument.
 
 Output File:
-1. It is a text file with output in tagged format
+1. It is a text file with output in tagged format.
+2. Also, the output is appended under <pardefs></pardefs> tag in apertium_ben_in_canonical_forms.dix
 
 Steps of execution:
-1. Paste your input excel sheet in the Automate_bangla_dix_generation folder
-2. Go to main.py and update -
-   1. file_path = '**excel_sheet_name.xlsx**'
-   
-      df = pd.read_excel(file_path, sheet_name='**sub_sheet name**')
-   
-   2. for eg. file_path = 'Verb_paradigm.xlsx' 
-      
-      df = pd.read_excel(file_path, sheet_name='kara')
-3. Run the following command -
-**python main.py prefix**
+1. Optional - Paste your input excel sheet in the Automate_bangla_dix_generation folder
+2. Run the following command -
+**python main.py path_to_input_excel**
 
 where main.py - is the script name
-prefix - denotes the variable part for which dix generation is done
+path_to_input_excel - denotes the input file excel sheet. If it is pasted in the same folder as script, only give name_of_excel.xlsx otherwise give proper path to the excel file.
 
 for eg. 
-**python main.py kar**
+**python main.py Verb_paradigm_kara.xlsx**

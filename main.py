@@ -36,12 +36,18 @@ def write_output(output):
         file.write(output)
         file.close()
 
-def update_dix(output):
+def update_dix(output, HEADER):
     with open(DIX, 'r') as file:
         xml_content = file.read()
 
     # Specify the tag you want to find and append text after
     target_tag = "pardefs"
+
+    #Check if HEADER already exists
+    header_start = xml_content.find(HEADER)
+    if header_start != -1:
+        print(f"{HEADER} already exists in the dix.")
+        sys.exit()
 
     # Find the index of the target tag's closing bracket
     target_start = xml_content.find(f"<{target_tag}>")
@@ -61,116 +67,111 @@ def update_dix(output):
     else:
         print(f"Target tag '{target_tag}' not found in the Dix.")
 
-def fetch_first_person_dix_entry(first_person_val, category_val, line):
+def fetch_first_person_dix_entry(first_person_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(first_person_val, str) and first_person_val.lower() != 'nan'):
         postfix_lst = first_person_val.split('/')
         for postfix in postfix_lst:
-            # remove kar
-            postfix = postfix[prefix_len:]
+            # remove fixed_tag
+            postfix = postfix[fixed_tag_len:]
             person_info = person_info_dict["first_person_val"]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
-def fetch_second_person_tucCartha_dix_entry(second_person_tucCartha_val, category_val, line):
+def fetch_second_person_tucCartha_dix_entry(second_person_tucCartha_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(second_person_tucCartha_val, str) and second_person_tucCartha_val.lower() != 'nan'):
         postfix_lst = second_person_tucCartha_val.split('/')
         for postfix in postfix_lst:
             # remove kar
-            postfix = postfix[prefix_len:]
+            postfix = postfix[fixed_tag_len:]
             person_info = person_info_dict["second_person_tucCartha_val"]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
-def fetch_second_person_dix_entry(second_person_val, category_val, line):
+def fetch_second_person_dix_entry(second_person_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(second_person_val, str) and second_person_val.lower() != 'nan'):
         postfix_lst = second_person_val.split('/')
         for postfix in postfix_lst:
             # remove kar
-            postfix = postfix[prefix_len:]
+            postfix = postfix[fixed_tag_len:]
             person_info = person_info_dict["second_person_val"]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
-def fetch_second_person_honorific_dix_entry(second_person_honorific_val, category_val, line):
+def fetch_second_person_honorific_dix_entry(second_person_honorific_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(second_person_honorific_val, str) and second_person_honorific_val.lower() != 'nan'):
         postfix_lst = second_person_honorific_val.split('/')
         for postfix in postfix_lst:
             # remove kar
-            postfix = postfix[prefix_len:]
+            postfix = postfix[fixed_tag_len:]
             person_info = person_info_dict["second_person_honorific_val"]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
-def fetch_third_person_dix_entry(third_person_val, category_val, line):
+def fetch_third_person_dix_entry(third_person_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(third_person_val, str) and third_person_val.lower() != 'nan'):
         postfix_lst = third_person_val.split('/')
         for postfix in postfix_lst:
             # remove kar
-            postfix = postfix[prefix_len:]
+            postfix = postfix[fixed_tag_len:]
             person_info = person_info_dict["third_person_val"]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
-def fetch_third_person_honorific_dix_entry(third_person_honorific_val, category_val, line):
+def fetch_third_person_honorific_dix_entry(third_person_honorific_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(third_person_honorific_val, str) and third_person_honorific_val.lower() != 'nan'):
         postfix_lst = third_person_honorific_val.split('/')
         for postfix in postfix_lst:
             # remove kar
-            postfix = postfix[prefix_len:]
+            postfix = postfix[fixed_tag_len:]
             person_info = person_info_dict["third_person_honorific_val"]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/><s n=\"per:{person_info}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
-def fetch_no_person_dix_entry(no_person_val, category_val, line):
+def fetch_no_person_dix_entry(no_person_val, category_val, line, var_tag):
     dix_entry_lst = []
     if (isinstance(no_person_val, str) and no_person_val.lower() != 'nan'):
         postfix_lst = no_person_val.split('/')
         for postfix in postfix_lst:
-            # remove kar
-            postfix = postfix[prefix_len:]
-            dix_entry = f"<e><p><l>{postfix}</l><r>a<s n=\"cat:{category_val}\"/>"
+            # remove
+            postfix = postfix[fixed_tag_len:]
+            dix_entry = f"<e><p><l>{postfix}</l><r>{var_tag}<s n=\"cat:{category_val}\"/>"
             dix_entry = dix_entry + line
             if len(dix_entry):
                 dix_entry_lst.append(dix_entry)
     return dix_entry_lst
 
 if __name__ == '__main__':
-    # Update the file_path and sheet_name as per requirement
-    file_path = 'Verb_paradigm.xlsx'
-    df = pd.read_excel(file_path, sheet_name='kara')
-
-    global prefix_len
-    prefix = sys.argv[1]
-    prefix_len = len(prefix)
-    HEADER = "<pardef n=\"kar/a__v\">"
-    FOOTER = "</pardef>"
+    # file_path expected as argument
+    file_path = sys.argv[1]
+    df = pd.read_excel(file_path)
 
     col_names = df.columns.tolist()
     # rename column names
+    pardef_tag = col_names[0]
     category = col_names[1]
     tam = col_names[2]
     first_person = col_names[3]
@@ -193,6 +194,26 @@ if __name__ == '__main__':
     no_person_lst = df[no_person].tolist()
     zipped_lists = zip(category_lst, tam_lst, first_person_lst, second_person_tucCartha_lst, second_person_lst, second_person_honorific_lst, third_person_lst, third_person_honorific_lst, no_person_lst)
 
+    global fixed_tag_len
+    if len(pardef_tag):
+        pardef_info = pardef_tag.strip().split("/")
+        fixed_tag = pardef_info[0]
+        var_tag = pardef_info[1].strip().split("__")[0]
+
+    fixed_tag_len = len(fixed_tag)
+    HEADER = f"<pardef n=\"{pardef_tag}\">"
+    FOOTER = "</pardef>"
+
+    with open(DIX, 'r') as file:
+        xml_content = file.read()
+
+    # Check if HEADER already exists
+    header_exists = xml_content.find(HEADER)
+
+    if header_exists != -1:
+        print(f"{HEADER} already exists in the dix. Remove the older entry from dix and re run")
+        sys.exit()
+
     output = ''
     for category_val, tam_val, first_person_val, second_person_tucCartha_val, second_person_val, second_person_honorific_val, \
             third_person_val, third_person_honorific_val, no_person_val in zipped_lists:
@@ -205,46 +226,46 @@ if __name__ == '__main__':
             line = line + "</r></p></e>"
 
         # first person
-        dix_entry_lst = fetch_first_person_dix_entry(first_person_val, category_val, line)
+        dix_entry_lst = fetch_first_person_dix_entry(first_person_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         # second person tucCartha
-        dix_entry_lst = fetch_second_person_tucCartha_dix_entry(second_person_tucCartha_val, category_val, line)
+        dix_entry_lst = fetch_second_person_tucCartha_dix_entry(second_person_tucCartha_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         # second person
-        dix_entry_lst = fetch_second_person_dix_entry(second_person_val, category_val, line)
+        dix_entry_lst = fetch_second_person_dix_entry(second_person_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         # second person honorific
-        dix_entry_lst = fetch_second_person_honorific_dix_entry(second_person_honorific_val, category_val, line)
+        dix_entry_lst = fetch_second_person_honorific_dix_entry(second_person_honorific_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         # third person
-        dix_entry_lst = fetch_third_person_dix_entry(third_person_val, category_val, line)
+        dix_entry_lst = fetch_third_person_dix_entry(third_person_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         # third person honorific
-        dix_entry_lst = fetch_third_person_honorific_dix_entry(third_person_honorific_val, category_val, line)
+        dix_entry_lst = fetch_third_person_honorific_dix_entry(third_person_honorific_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         # no_person
-        dix_entry_lst = fetch_no_person_dix_entry(no_person_val, category_val, line)
+        dix_entry_lst = fetch_no_person_dix_entry(no_person_val, category_val, line, var_tag)
         for dix_entry in dix_entry_lst:
             output = output + dix_entry + '\n'
 
         output = output + '\n'
         # Define the text you want to append in DIX
-        text_to_append = HEADER + "\n" + output + "\n" + FOOTER
+        text_to_append = HEADER + "\n" + output + FOOTER + "\n"
 
-    write_output(output)
-    update_dix(text_to_append)
+    write_output(text_to_append)
+    update_dix(text_to_append, HEADER)
 
 
 

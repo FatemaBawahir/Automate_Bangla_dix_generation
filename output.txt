@@ -1,3 +1,4 @@
+<pardef n="kar/a__v">
 <e><p><l>i</l><r>a<s n="cat:v"/><s n="per:u"/><s n="tam:e"/></r></p></e>
 <e><p><l>isai</l><r>a<s n="cat:v"/><s n="per:m_h0"/><s n="tam:e"/></r></p></e>
 <e><p><l>a</l><r>a<s n="cat:v"/><s n="per:m_h1"/><s n="tam:e"/></r></p></e>
@@ -311,3 +312,4 @@
 <e><p><l>o</l><r>a<s n="cat:v"/><s n="per:m_h1"/><s n="tam:imper_fut"/></r></p></e>
 <e><p><l>abena</l><r>a<s n="cat:v"/><s n="per:m_h2"/><s n="tam:imper_fut"/></r></p></e>
 
+</pardef>
