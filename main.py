@@ -36,7 +36,7 @@ def write_output(output):
         file.write(output)
         file.close()
 
-def update_dix(output, HEADER):
+def update_dix(text_to_append, HEADER):
     with open(DIX, 'r') as file:
         xml_content = file.read()
 
